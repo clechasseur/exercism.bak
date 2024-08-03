@@ -1,0 +1,12 @@
+{
+  "authors": ["meatball133"],
+  "contributors": ["ryanplusplus"],
+  "files": {
+    "solution": ["src/blackjack.cr"],
+    "test": ["spec/blackjack_spec.cr"],
+    "exemplar": [".meta/src/exemplar.cr"]
+  },
+  "forked_from": ["go/blackjack"],
+  "blurb": "Learn about cases while simulating blackjack",
+  "icon": "blackjack"
+}

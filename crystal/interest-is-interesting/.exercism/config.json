@@ -1,0 +1,12 @@
+{
+  "authors": ["meatball133"],
+  "contributors": ["glennj"],
+  "files": {
+    "solution": ["src/interest_is_interesting.cr"],
+    "test": ["spec/interest_is_interesting_spec.cr"],
+    "exemplar": [".meta/src/exemplar.cr"]
+  },
+  "forked_from": ["csharp/interest-is-interesting"],
+  "blurb": "Learn about while loops by adding interest to savings accounts.",
+  "icon": "interest-is-interesting"
+}

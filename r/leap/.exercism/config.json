@@ -1,0 +1,24 @@
+{
+  "authors": [
+    "jonmcalder"
+  ],
+  "contributors": [
+    "jonboiser",
+    "katrinleinweber",
+    "zacchaeusluke"
+  ],
+  "files": {
+    "solution": [
+      "leap.R"
+    ],
+    "test": [
+      "test_leap.R"
+    ],
+    "example": [
+      ".meta/example.R"
+    ]
+  },
+  "blurb": "Determine whether a given year is a leap year.",
+  "source": "CodeRanch Cattle Drive, Assignment 3",
+  "source_url": "https://coderanch.com/t/718816/Leap"
+}

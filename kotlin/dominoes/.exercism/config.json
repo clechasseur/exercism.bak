@@ -1,0 +1,21 @@
+{
+  "authors": [
+    "lathspell"
+  ],
+  "contributors": [
+    "eparovyshnaya",
+    "uzilan"
+  ],
+  "files": {
+    "solution": [
+      "src/main/kotlin/Dominoes.kt"
+    ],
+    "test": [
+      "src/test/kotlin/DominoesTest.kt"
+    ],
+    "example": [
+      ".meta/src/reference/kotlin/Dominoes.kt"
+    ]
+  },
+  "blurb": "Make a chain of dominoes."
+}

@@ -1,0 +1,12 @@
+{
+  "authors": ["meatball133"],
+  "contributors": ["neenjaw"],
+  "files": {
+    "solution": ["src/high_school_sweetheart.cr"],
+    "test": ["spec/high_school_sweetheart_spec.cr"],
+    "exemplar": [".meta/src/exemplar.cr"]
+  },
+  "forked_from": ["elixir/high-school-sweetheart"],
+  "icon": "high-school-sweethearts",
+  "blurb": "Learn about strings by helping high school sweethearts profess their love on social media via ASCII art."
+}

@@ -1,0 +1,11 @@
+{
+  "authors": ["meatball133"],
+  "contributors": ["erikschierboom"],
+  "files": {
+    "solution": ["src/library_of_luton.cr"],
+    "test": ["spec/library_of_luton_spec.cr"],
+    "exemplar": [".meta/src/exemplar.cr"]
+  },
+  "icon": "library-fees",
+  "blurb": "Help the library of Luton to automate some of their processes, while learning about Chars"
+}

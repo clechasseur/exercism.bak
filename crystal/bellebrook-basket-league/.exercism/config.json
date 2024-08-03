@@ -1,0 +1,11 @@
+{
+  "authors": ["meatball133", "ryanplusplus"],
+  "contributors": [],
+  "files": {
+    "solution": ["src/bellebrook_basket_league.cr"],
+    "test": ["spec/bellebrook_basket_league_spec.cr"],
+    "exemplar": [".meta/src/exemplar.cr"]
+  },
+  "blurb": "Learn about modules, while building a basketball league ticketing system.",
+  "icon": "basketball-website"
+}

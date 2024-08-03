@@ -1,0 +1,11 @@
+{
+  "authors": ["meatball133"],
+  "contributors": ["ryanplusplus"],
+  "files": {
+    "solution": ["src/castle_dinner.cr"],
+    "test": ["spec/castle_dinner_spec.cr"],
+    "exemplar": [".meta/src/exemplar.cr"]
+  },
+  "blurb": "Learn about Nil while making sure no food or drink includes poison.",
+  "icon": "bread-and-potions"
+}

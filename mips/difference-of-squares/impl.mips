@@ -1,0 +1,24 @@
+# | Register | Usage     | Type    | Purpose                    |
+# | -------- | --------- | ------- | -------------------------- |
+# | `$a0`    | input     | integer | given value                |
+# | `$v0`    | output    | integer | difference of squares      |
+# | `$t0-9`  | temporary | any     | used for temporary storage |
+
+.globl difference_of_squares
+
+difference_of_squares:
+        addi $t0,$0,0 #i
+        addi $t1,$0,0 #(1+2+3+...+N)
+        addi $t3,$0,0 #(N^2)
+
+
+        loop1:
+        addi $t0,$t0,1  #i++
+        add $t1,$t1,$t0 #(sum+i)
+        mul $t2,$t0,$t0 #(i^2)
+        add $t3,$t2,$t3 #(i^2+sum of squares)
+        blt $t0,$a0,loop1 #if i<$a0 go to loop1
+        mul $t1,$t1,$t1   #sum^2
+        sub $v0,$t1,$t3   #sum^2-(1^2+...+N^2)
+        jr $ra
+        
