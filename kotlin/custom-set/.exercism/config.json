@@ -1,0 +1,21 @@
+{
+  "authors": [
+    "lathspell"
+  ],
+  "contributors": [
+    "eparovyshnaya",
+    "uzilan"
+  ],
+  "files": {
+    "solution": [
+      "src/main/kotlin/CustomSet.kt"
+    ],
+    "test": [
+      "src/test/kotlin/CustomSetTest.kt"
+    ],
+    "example": [
+      ".meta/src/reference/kotlin/CustomSet.kt"
+    ]
+  },
+  "blurb": "Create a custom set type."
+}

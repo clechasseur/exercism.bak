@@ -1,0 +1,11 @@
+{
+  "authors": ["meatball133"],
+  "contributors": ["ryanplusplus"],
+  "files": {
+    "solution": ["src/password_lock.cr"],
+    "test": ["spec/password_lock_spec.cr"],
+    "exemplar": [".meta/src/exemplar.cr"]
+  },
+  "icon": "authentication-system",
+  "blurb": "Build a password lock system while learning about union types"
+}

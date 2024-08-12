@@ -1,0 +1,40 @@
+# Reverse String
+
+Welcome to Reverse String on Exercism's Crystal Track.
+If you need help running the tests or submitting your code, check out `HELP.md`.
+
+## Introduction
+
+Reversing strings (reading them from right to left, rather than from left to right) is a surprisingly common task in programming.
+
+For example, in bioinformatics, reversing the sequence of DNA or RNA strings is often important for various analyses, such as finding complementary strands or identifying palindromic sequences that have biological significance.
+
+## Instructions
+
+Your task is to reverse a given string.
+
+Some examples:
+
+- Turn `"stressed"` into `"desserts"`.
+- Turn `"strops"` into `"sports"`.
+- Turn `"racecar"` into `"racecar"`.
+
+An optional test has been added that tests for possible letters to be any unicode character, not just ASCII alphabetic ones.
+These are not accessible from the web editor, but are run by default when executed locally.
+
+To disable these tests, when calling the test command (`crystal spec`), add the following flag: `--tag "~optional"`
+
+## Source
+
+### Created by
+
+- @amscotti
+
+### Contributed to by
+
+- @issyl0
+- @mhelmetag
+
+### Based on
+
+Introductory challenge to reverse an input string - https://medium.freecodecamp.org/how-to-reverse-a-string-in-javascript-in-3-different-ways-75e4763c68cb

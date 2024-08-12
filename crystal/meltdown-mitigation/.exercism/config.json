@@ -1,0 +1,12 @@
+{
+  "authors": ["meatball133"],
+  "contributors": ["glennj"],
+  "files": {
+    "solution": ["src/conditionals.cr"],
+    "test": ["spec/conditionals_spec.cr"],
+    "exemplar": [".meta/src/exemplar.cr"]
+  },
+  "forked_from": ["python/meltdown-mitigation"],
+  "blurb": "Learn about conditionals and avoid a meltdown by developing a simple control system for a Nuclear Reactor.",
+  "icon": "circular-buffer"
+}

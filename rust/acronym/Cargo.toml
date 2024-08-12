@@ -1,0 +1,12 @@
+[package]
+edition = "2021"
+name = "acronym"
+version = "1.7.0"
+
+[[bench]]
+name = "abbreviate_bench"
+harness = false
+
+# Uncomment this to run benchmarks with Criterion:
+#[dev-dependencies]
+#criterion = "0.5"
