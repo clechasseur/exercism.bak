@@ -1,0 +1,60 @@
+## Registers
+
+# | Register | Usage     | Type    | Description                                      |
+# | -------- | --------- | ------- | ------------------------------------------------ |
+# | `$a0`    | input     | integer | year to check                                    |
+# | `$v0`    | output    | boolean | input is leap year (`0` = `false`, `1` = `true`) |
+# | `$t0-9`  | temporary | any     | used for temporary storage                       |
+
+.globl is_leap_year
+
+# This approach is similar to the boolean chain approach, but uses a helper function
+# to determine if the year is evenly divisible by a certain number.
+# It corresponds roughly to this C code:
+#
+# ```c
+# int is_divisible_by(int year, int divisor) {
+#     return year % divisor == 0;
+# }
+#
+# int is_leap_year(int year) {
+#     return is_divisible_by(year, 4) && !is_divisible_by(year, 100) || is_divisible_by(year, 400);
+# }
+# ```
+
+is_leap_year:
+        addi    $sp, $sp, -4
+        sw      $ra, 0($sp)
+        li      $v0, 0
+
+        li      $a1, 4
+        jal     is_divisible_by
+        beqz    $v1, end
+
+        li      $a1, 100
+        jal     is_divisible_by
+        beqz    $v1, set_leap
+
+        li      $a1, 400
+        jal     is_divisible_by
+        beqz    $v1, end
+
+set_leap:
+        li      $v0, 1
+end:
+        lw      $ra, 0($sp)
+        addi    $sp, $sp, 4
+        jr      $ra
+
+
+# Input: 
+# $a0 => year
+# $a1 => divisor
+#
+# Output:
+# $v1 => 1 if evenly divisible by, otherwise 0
+is_divisible_by:
+        div     $a0, $a1
+        mfhi    $t0
+        slti    $v1, $t0, 1
+        jr      $ra

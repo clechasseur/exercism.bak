@@ -1,6 +1,6 @@
 {
   "uuid": "f528b8b8467e48e196496156ce54c751",
-  "iterations": [
-    1
-  ]
+  "last_iteration_marker": {
+    "num_iterations": 1
+  }
 }

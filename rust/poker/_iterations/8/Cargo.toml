@@ -1,0 +1,10 @@
+[package]
+edition = "2021"
+name = "poker"
+version = "1.1.0"
+
+[dependencies]
+derivative = "~2"
+strum = "~0.24"
+strum_macros = "~0.24"
+thiserror = "~1"

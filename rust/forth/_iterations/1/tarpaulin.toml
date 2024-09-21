@@ -1,0 +1,5 @@
+[default]
+engine = "Llvm"
+exclude-files = [ "target*/*" ]
+run-types = [ "Tests" ]
+out = [ "Html", "Xml" ]

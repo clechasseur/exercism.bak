@@ -6,4 +6,4 @@ default:
 
 # Backup exercism solutions to root directory
 backup *args:
-    auxiliaire backup -s published {{args}} .
+    auxiliaire backup -s published -i f {{args}} .

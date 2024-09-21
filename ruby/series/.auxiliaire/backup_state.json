@@ -1,6 +1,6 @@
 {
   "uuid": "42fffcfbe51f4d6a94589986779de80c",
-  "iterations": [
-    2
-  ]
+  "last_iteration_marker": {
+    "last_iterated_at": "2022-12-27T00:42:20Z"
+  }
 }
