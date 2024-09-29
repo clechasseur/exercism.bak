@@ -2,6 +2,3 @@
 edition = "2021"
 name = "pangram"
 version = "0.0.0"
-
-[dependencies]
-bit-set = "0.8.0"
