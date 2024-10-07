@@ -72,4 +72,4 @@ No linear memory is required for this exercise.
 
 ### Based on
 
-Christian Willner, Eric Willigers - https://forum.exercism.org/t/new-exercise-suggestion-pop-count/7632/5
+Christian Willner, Eric Willigers - https://forum.exercism.org/t/new-exercise-suggestion-eliuds-eggs/7632/5
