@@ -1,17 +1,13 @@
 class Item {
-    private final int weight;
-    private final int value;
 
-    Item(int weight, int value) {
-        this.weight = weight;
-        this.value = value;
+    // Weight of the item
+    int weight;
+    // Value of the item
+    int value;
+
+    Item(int itemWeight, int itemValue) {
+        this.weight = itemWeight;
+        this.value = itemValue;
     }
 
-    int getWeight() {
-        return weight;
-    }
-
-    int getValue() {
-        return value;
-    }
 }
