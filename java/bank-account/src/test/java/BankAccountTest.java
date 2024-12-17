@@ -1,195 +1,194 @@
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.fail;
-
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.util.Random;
 
+import static org.assertj.core.api.Assertions.*;
+
 public class BankAccountTest {
-    private BankAccount bankAccount = new BankAccount();
+    private BankAccount bankAccount;
+
+    @BeforeEach
+    public void setUp() {
+        bankAccount = new BankAccount();
+    }
 
     @Test
     public void newlyOpenedAccountHasEmptyBalance() throws BankAccountActionInvalidException {
         bankAccount.open();
 
-        assertEquals(0, bankAccount.getBalance());
+        assertThat(bankAccount.getBalance()).isEqualTo(0);
     }
 
-    @Ignore("Remove to run test")
+    @Disabled("Remove to run test")
     @Test
-    public void canDepositMoney() throws BankAccountActionInvalidException {
+    public void singleDeposit() throws BankAccountActionInvalidException {
+        bankAccount.open();
+        bankAccount.deposit(100);
+
+        assertThat(bankAccount.getBalance()).isEqualTo(100);
+    }
+
+    @Disabled("Remove to run test")
+    @Test
+    public void multipleDeposits() throws BankAccountActionInvalidException {
+        bankAccount.open();
+        bankAccount.deposit(100);
+        bankAccount.deposit(50);
+
+        assertThat(bankAccount.getBalance()).isEqualTo(150);
+    }
+
+    @Disabled("Remove to run test")
+    @Test
+    public void withdrawOnce() throws BankAccountActionInvalidException {
+        bankAccount.open();
+        bankAccount.deposit(100);
+        bankAccount.withdraw(75);
+
+        assertThat(bankAccount.getBalance()).isEqualTo(25);
+    }
+
+    @Disabled("Remove to run test")
+    @Test
+    public void withdrawTwice() throws BankAccountActionInvalidException {
+        bankAccount.open();
+        bankAccount.deposit(100);
+        bankAccount.withdraw(80);
+        bankAccount.withdraw(20);
+
+        assertThat(bankAccount.getBalance()).isEqualTo(0);
+    }
+
+    @Disabled("Remove to run test")
+    @Test
+    public void canDoMultipleOperationsSequentially() throws BankAccountActionInvalidException {
+        bankAccount.open();
+        bankAccount.deposit(100);
+        bankAccount.deposit(110);
+        bankAccount.withdraw(200);
+        bankAccount.deposit(60);
+        bankAccount.withdraw(50);
+
+        assertThat(bankAccount.getBalance()).isEqualTo(20);
+    }
+
+    @Disabled("Remove to run test")
+    @Test
+    public void cannotCheckBalanceOfClosedAccount() throws BankAccountActionInvalidException {
+        bankAccount.open();
+        bankAccount.close();
+
+        assertThatExceptionOfType(BankAccountActionInvalidException.class)
+                .isThrownBy(bankAccount::getBalance)
+                .withMessage("Account closed");
+    }
+
+    @Disabled("Remove to run test")
+    @Test
+    public void cannotDepositIntoClosedAccount() throws BankAccountActionInvalidException {
+        bankAccount.open();
+        bankAccount.close();
+
+        assertThatExceptionOfType(BankAccountActionInvalidException.class)
+                .isThrownBy(() -> bankAccount.deposit(50))
+                .withMessage("Account closed");
+    }
+
+    @Disabled("Remove to run test")
+    @Test
+    public void cannotDepositIntoUnopenedAccount() {
+        assertThatExceptionOfType(BankAccountActionInvalidException.class)
+                .isThrownBy(() -> bankAccount.deposit(50))
+                .withMessage("Account closed");
+    }
+
+    @Disabled("Remove to run test")
+    @Test
+    public void cannotWithdrawFromClosedAccount() throws BankAccountActionInvalidException {
+        bankAccount.open();
+        bankAccount.close();
+
+        assertThatExceptionOfType(BankAccountActionInvalidException.class)
+                .isThrownBy(() -> bankAccount.withdraw(50))
+                .withMessage("Account closed");
+    }
+
+    @Disabled("Remove to run test")
+    @Test
+    public void cannotCloseAnAccountThatWasNotOpened() {
+        assertThatExceptionOfType(BankAccountActionInvalidException.class)
+                .isThrownBy(bankAccount::close)
+                .withMessage("Account not open");
+    }
+
+    @Disabled("Remove to run test")
+    @Test
+    public void cannotOpenAnAlreadyOpenedAccount() throws BankAccountActionInvalidException {
         bankAccount.open();
 
-        bankAccount.deposit(10);
-
-        assertEquals(10, bankAccount.getBalance());
+        assertThatExceptionOfType(BankAccountActionInvalidException.class)
+                .isThrownBy(bankAccount::open)
+                .withMessage("Account already open");
     }
 
-    @Ignore("Remove to run test")
+    @Disabled("Remove to run test")
     @Test
-    public void canDepositMoneySequentially() throws BankAccountActionInvalidException {
+    public void reopenedAccountDoesNotRetainBalance() throws BankAccountActionInvalidException {
+        bankAccount.open();
+        bankAccount.deposit(50);
+        bankAccount.close();
         bankAccount.open();
 
-        bankAccount.deposit(5);
-        bankAccount.deposit(23);
-
-        assertEquals(28, bankAccount.getBalance());
+        assertThat(bankAccount.getBalance()).isEqualTo(0);
     }
 
-    @Ignore("Remove to run test")
+    @Disabled("Remove to run test")
     @Test
-    public void canWithdrawMoney() throws BankAccountActionInvalidException {
+    public void cannotWithdrawMoreThanWasDeposited() throws BankAccountActionInvalidException {
         bankAccount.open();
-        bankAccount.deposit(10);
+        bankAccount.deposit(25);
 
-        bankAccount.withdraw(5);
-
-        assertEquals(5, bankAccount.getBalance());
+        assertThatExceptionOfType(BankAccountActionInvalidException.class)
+                .isThrownBy(() -> bankAccount.withdraw(50))
+                .withMessage("Cannot withdraw more money than is currently in the account");
     }
 
-    @Ignore("Remove to run test")
-    @Test
-    public void canWithdrawMoneySequentially() throws BankAccountActionInvalidException {
-        bankAccount.open();
-        bankAccount.deposit(23);
-
-        bankAccount.withdraw(10);
-        bankAccount.withdraw(13);
-
-        assertEquals(0, bankAccount.getBalance());
-    }
-
-    @Ignore("Remove to run test")
-    @Test
-    public void cannotWithdrawMoneyFromEmptyAccount() {
-        bankAccount.open();
-
-        BankAccountActionInvalidException expected =
-            assertThrows(
-                BankAccountActionInvalidException.class,
-                () -> bankAccount.withdraw(5));
-
-        assertThat(expected)
-            .hasMessage("Cannot withdraw money from an empty account");
-    }
-
-    @Ignore("Remove to run test")
-    @Test
-    public void cannotWithdrawMoreMoneyThanYouHave() throws BankAccountActionInvalidException {
-        bankAccount.open();
-        bankAccount.deposit(6);
-
-        BankAccountActionInvalidException expected =
-            assertThrows(
-                BankAccountActionInvalidException.class,
-                () -> bankAccount.withdraw(7));
-
-        assertThat(expected)
-            .hasMessage(
-                "Cannot withdraw more money than is currently in the account");
-
-    }
-
-    @Ignore("Remove to run test")
-    @Test
-    public void cannotDepositNegativeAmount() {
-        bankAccount.open();
-
-        BankAccountActionInvalidException expected =
-            assertThrows(
-                BankAccountActionInvalidException.class,
-                () -> bankAccount.deposit(-1));
-
-        assertThat(expected)
-            .hasMessage("Cannot deposit or withdraw negative amount");
-    }
-
-    @Ignore("Remove to run test")
+    @Disabled("Remove to run test")
     @Test
     public void cannotWithdrawNegativeAmount() throws BankAccountActionInvalidException {
         bankAccount.open();
-        bankAccount.deposit(105);
+        bankAccount.deposit(100);
 
-        BankAccountActionInvalidException expected =
-            assertThrows(
-                BankAccountActionInvalidException.class,
-                () -> bankAccount.withdraw(-5));
-
-        assertThat(expected)
-            .hasMessage("Cannot deposit or withdraw negative amount");
+        assertThatExceptionOfType(BankAccountActionInvalidException.class)
+                .isThrownBy(() -> bankAccount.withdraw(-50))
+                .withMessage("Cannot deposit or withdraw negative amount");
     }
 
-    @Ignore("Remove to run test")
+    @Disabled("Remove to run test")
     @Test
-    public void cannotGetBalanceOfClosedAccount() throws BankAccountActionInvalidException {
+    public void cannotDepositNegativeAmount() throws BankAccountActionInvalidException {
         bankAccount.open();
-        bankAccount.deposit(10);
-        bankAccount.close();
 
-        BankAccountActionInvalidException expected =
-            assertThrows(
-                BankAccountActionInvalidException.class,
-                bankAccount::getBalance);
-
-        assertThat(expected).hasMessage("Account closed");
+        assertThatExceptionOfType(BankAccountActionInvalidException.class)
+                .isThrownBy(() -> bankAccount.deposit(-50))
+                .withMessage("Cannot deposit or withdraw negative amount");
     }
 
-    @Ignore("Remove to run test")
+    @Disabled("Remove to run test")
     @Test
-    public void cannotDepositMoneyIntoClosedAccount() {
-        bankAccount.open();
-        bankAccount.close();
-
-        BankAccountActionInvalidException expected =
-            assertThrows(
-                BankAccountActionInvalidException.class,
-                () -> bankAccount.deposit(5));
-
-        assertThat(expected).hasMessage("Account closed");
-    }
-
-    @Ignore("Remove to run test")
-    @Test
-    public void cannotWithdrawMoneyFromClosedAccount() throws BankAccountActionInvalidException {
-        bankAccount.open();
-        bankAccount.deposit(20);
-        bankAccount.close();
-
-        BankAccountActionInvalidException expected =
-            assertThrows(
-                BankAccountActionInvalidException.class,
-                () -> bankAccount.withdraw(5));
-
-        assertThat(expected).hasMessage("Account closed");
-    }
-
-    @Ignore("Remove to run test")
-    @Test
-    public void bankAccountIsClosedBeforeItIsOpened() {
-        BankAccountActionInvalidException expected =
-            assertThrows(
-                BankAccountActionInvalidException.class,
-                bankAccount::getBalance);
-
-        assertThat(expected).hasMessage("Account closed");
-    }
-
-    @Ignore("Remove to run test")
-    @Test
-    public void canAdjustBalanceConcurrently() throws BankAccountActionInvalidException, InterruptedException {
+    public void canHandleConcurrentTransactions() throws BankAccountActionInvalidException, InterruptedException {
         bankAccount.open();
         bankAccount.deposit(1000);
 
         for (int i = 0; i < 10; i++) {
             adjustBalanceConcurrently();
-            assertEquals(1000, bankAccount.getBalance());
+            assertThat(bankAccount.getBalance()).isEqualTo(1000);
         }
     }
 
-    private void adjustBalanceConcurrently() throws BankAccountActionInvalidException, InterruptedException {
+    private void adjustBalanceConcurrently() throws InterruptedException {
         Random random = new Random();
 
         Thread[] threads = new Thread[1000];

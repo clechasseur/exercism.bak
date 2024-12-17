@@ -1,0 +1,86 @@
+# | Register | Usage     | Type    | Description                                       |
+# | -------- | --------- | ------- | ------------------------------------------------- |
+# | `$a0`    | input     | integer | number                                            |
+# | `$v0`    | output    | boolean | is armstrong number (`0` = `false`, `1` = `true`) |
+# | `$t0-9`  | temporary | any     | used for temporary storage                        |
+
+.globl is_armstrong_number
+
+is_armstrong_number:
+        # 0 is an Armstrong number
+        bnez    $a0, not_zero
+        li      $v0, 1
+        jr      $ra
+
+not_zero:
+        # Count number of digits in number
+        li      $t1, 10
+        move    $t0, $a0
+        li      $t9, 0
+count_digits_loop:
+        addi    $t9, $t9, 1
+        div     $t0, $t1
+        mflo    $t0
+        bnez    $t0, count_digits_loop
+
+        # Iterate the number's digits
+        li      $t8, 0
+        move    $t0, $a0
+sum_loop:
+        div     $t0, $t1
+        mflo    $t0
+        mfhi    $t2
+        # Raise current digit to the power of the number of digits
+        move    $t3, $t2
+        subi    $t4, $t9, 1
+        beqz    $t4, accumulate
+pow_loop:
+        mult    $t2, $t3
+        mflo    $t2
+        subi	$t4, $t4, 1
+        bnez    $t4, pow_loop
+accumulate:
+        # Add the current digit's raised value to the sum
+        add     $t8, $t8, $t2
+        bnez    $t0, sum_loop
+
+        # If sum is equal to the initial number, it's an Armstrong number
+        xor     $v0, $t8, $a0
+        slti    $v0, $v0, 1
+        jr      $ra
+
+# Corresponding C code:
+#
+# ```c
+# #include <stdlib.h>
+#
+# int is_armstrong_number(int n) {
+#     if (n == 0) {
+#         return 1;
+#     }
+#
+#     int num_digits = 0;
+#     int temp = n;
+#     do {
+#         ++num_digits;
+#         temp /= 10;
+#     } while (temp != 0);
+#
+#     int sum = 0;
+#     temp = n;
+#     do {
+#         div_t by_10 = div(temp, 10);
+#         int digit = by_10.rem;
+#         int digit_value = digit;
+#         int pow_count = num_digits;
+#         temp = by_10.quot;
+#
+#         while (--pow_count != 0) {
+#             digit_value *= digit;
+#         }
+#         sum += digit_value;
+#     } while (temp != 0);
+#
+#     return sum == n ? 1 : 0;
+# }
+# ```
