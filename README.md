@@ -8,4 +8,4 @@ The solutions are backed up using [`auxiliaire`](https://github.com/clechasseur/
 ## License
 
 The code in my solutions is covered by the [MIT license](./LICENSE).
-The code of Exercism tests is also covered by the [MIT liencese](./LICENSE.exercism).
+The code of Exercism tests is also covered by the [MIT license](./LICENSE.exercism).
